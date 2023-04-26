@@ -186,7 +186,16 @@ WHERE CONTINENT IS NOT NULL
 GROUP BY date
 ORDER BY date 
 
----14.differentiating countries into mildly affected,severly affected,very severly affected
+---14.Overall global death percentage
+
+SELECT SUM(NEW_CASES) AS NS,
+	SUM(NEW_DEATHS) AS ND,
+    SUM(NEW_DEATHS)/SUM(NEW_CASES) AS Deathpercentage
+FROM COVID_DEATHS
+WHERE CONTINENT IS NOT NULL
+ 
+
+---15.differentiating countries into mildly affected,severly affected,very severly affected
 ---based on the percentage of population affected by covid by creating view
 
 DROP VIEW IF EXISTS SEVERITY;
@@ -211,7 +220,7 @@ FROM SEVERITY
 WHERE INFECTEDPERCENTAGE IS NOT NULL
 ORDER BY INFECTEDPERCENTAGE;
 
---15. Percentage of Population that has recieved  Covid Vaccine
+--16. Percentage of Population that has recieved  Covid Vaccine
 
 SELECT DEA.CONTINENT,
 	DEA.LOCATION,
